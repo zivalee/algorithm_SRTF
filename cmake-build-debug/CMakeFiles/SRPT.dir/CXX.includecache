@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/ziva/CLionProjects/C++/SRPT/main.cpp
+iostream
+-
+string
+-
+fstream
+-
+vector
+-
+sstream
+-
+climits
+-
+
