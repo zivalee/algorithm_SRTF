@@ -5,16 +5,21 @@
 #include <sstream>
 #include <climits>
 #include <utility> // pair
+#include <ctime>
 
 using namespace std;
 
+// heap
+// 找小於+heapify (nlogn)
+// for
+//
 // first: Process Length (pj)
 // second: Arrival Time (rj)
 vector<int> findWaitingTime(vector<pair<int, int>> proc, int n, vector<int> wt) {
     int pl[n];
 
     // copy the process length into pl[]
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++) {
         pl[i] = proc[i].first;
     }
 
@@ -121,29 +126,37 @@ int main() {
     cout << "There are k jobs...." << endl;
     for (int k = 20; k <= 100; k += 20) {
         vector<pair<int, int>> process;
-        cout << "k = " << k << endl;
+        cout << "k = " << k << ", ";
 
         // prepare data for SRPT
         for (int j = 0; j < k; j++) {
             // SRPT loop
             process.push_back({data[j].first, data[j].second});
-            cout << data[j].second << ", ";
+//            cout << data[j].second << ", ";
         }
-        cout << endl;
+//        cout << endl;
         for (int j = 0; j < k; j++) {
-            cout << data[j].first << ",  ";
+//            cout << data[j].first << ",  ";
         }
-        cout << endl;
+//        cout << endl;
 
         vector<int> wt(k);
+        int total = 0;
+        clock_t start = clock();
+        // SRPT
         wt = findWaitingTime(process, process.size(), wt);
+        clock_t end = clock();
+        double elapsed_secs = double(end - start);
+        cout << "elapsed run time: " << elapsed_secs << " ms, ";
 
         // print process finished time
-        for(int b=0; b<wt.size(); b++){
-            cout << wt[b] << ", ";
+        for (int b = 0; b < wt.size(); b++) {
+            total += wt[b];
         }
-        cout << endl;
+        cout << "Objective Value: " << total << endl;
     }
+
+
 
     return 0;
 }
