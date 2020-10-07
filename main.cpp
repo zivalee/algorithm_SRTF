@@ -9,10 +9,6 @@
 
 using namespace std;
 
-// heap
-// 找小於+heapify (nlogn)
-// for
-//
 // first: Process Length (pj)
 // second: Arrival Time (rj)
 vector<int> findWaitingTime(vector<pair<int, int>> proc, int n, vector<int> wt) {
@@ -130,7 +126,6 @@ int main() {
 
         // prepare data for SRPT
         for (int j = 0; j < k; j++) {
-            // SRPT loop
             process.push_back({data[j].first, data[j].second});
 //            cout << data[j].second << ", ";
         }
@@ -140,23 +135,22 @@ int main() {
         }
 //        cout << endl;
 
-        vector<int> wt(k);
-        int total = 0;
-        clock_t start = clock();
         // SRPT
+        vector<int> wt(k);
+        clock_t start = clock();
         wt = findWaitingTime(process, process.size(), wt);
         clock_t end = clock();
+
+        // run time
         double elapsed_secs = double(end - start);
         cout << "elapsed run time: " << elapsed_secs << " ms, ";
 
-        // print process finished time
+        // count total process finished time
+        int total = 0;
         for (int b = 0; b < wt.size(); b++) {
             total += wt[b];
         }
         cout << "Objective Value: " << total << endl;
     }
-
-
-
     return 0;
 }
